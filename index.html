@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: black;
+      color: #00ffcc;
+      font-family: monospace;
+      padding: 20px;
+    }
+    textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      background: #111;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>PHASMID CODE</h2>
+
+<textarea id="input" placeholder="Type text here"></textarea>
+<button onclick="encode()">ENCODE</button>
+
+<textarea id="output" placeholder="Coded output"></textarea>
+
+<script>
+function encode() {
+  let text = document.getElementById("input").value.toUpperCase();
+  let result = [];
+  for (let i = 0; i < text.length; i++) {
+    let c = text.charCodeAt(i);
+    if (c >= 65 && c <= 90) {
+      result.push(c - 64);
+    } else {
+      result.push(text[i]);
+    }
+  }
+  document.getElementById("output").value = result.join("|");
+}
+</script>
+
+</body>
+</html>
