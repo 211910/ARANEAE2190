@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Secret Code</title>
+  <title>ARANEAE 2190 CODE TOOL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      background: black;
+      background-color: #000;
       color: #00ffcc;
-      font-family: monospace;
+      font-family: 'Courier New', monospace;
       padding: 20px;
+    }
+    h1, h3 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .signature {
+      text-align: center;
+      font-size: 12px;
+      color: #ff3300;
+      margin-bottom: 20px;
     }
     textarea, button {
       width: 100%;
@@ -17,33 +27,113 @@
       color: #00ffcc;
       border: 1px solid #00ffcc;
       padding: 10px;
+      font-size: 16px;
+      resize: none;
+    }
+    button {
+      cursor: pointer;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-<h2>PHASMID CODE</h2>
+<h1>ARANEAE 2190</h1>
+<h3>PUBLISHER 211910</h3>
+<div class="signature">17 - 10|21|12|25 B00I</div>
 
-<textarea id="input" placeholder="Type text here"></textarea>
+<textarea id="input" placeholder="Type your message here..."></textarea>
 <button onclick="encode()">ENCODE</button>
+<button onclick="decode()">DECODE</button>
 
-<textarea id="output" placeholder="Coded output"></textarea>
+<textarea id="output" placeholder="Result will appear here..."></textarea>
 
 <script>
+// Encode function: A=1, B=2 ... Z=26
 function encode() {
   let text = document.getElementById("input").value.toUpperCase();
   let result = [];
   for (let i = 0; i < text.length; i++) {
     let c = text.charCodeAt(i);
-    if (c >= 65 && c <= 90) {
+    if(c >= 65 && c <= 90){
       result.push(c - 64);
     } else {
-      result.push(text[i]);
+      result.push(text[i]); // keep spaces/symbols
     }
   }
   document.getElementById("output").value = result.join("|");
+}
+
+// Decode function: 1=A, 2=B ... 26=Z
+function decode() {
+  let text = document.getElementById("input").value;
+  let parts = text.split("|");
+  let result = [];
+  for (let i = 0; i < parts.length; i++) {
+    let num = parseInt(parts[i]);
+    if(!isNaN(num) && num >= 1 && num <= 26){
+      result.push(String.fromCharCode(num + 64));
+    } else {
+      result.push(parts[i]);
+    }
+  }
+  document.getElementById("output").value = result.join("");
 }
 </script>
 
 </body>
 </html>
+
+
+
+
+
+<pre id="face" style="
+text-align:center;
+font-size:14px;
+line-height:1.2;
+color:#00ffcc;
+margin-top:20px;
+"></pre>
+
+<script>
+const faces = [
+`
+   ..!?££!?..
+  .(  O   O  ).
+ .;     ^     ;.
+ .(   \\___/   ).
+   ..!?££!?..
+`,
+`
+   ..!?££!?..
+  .(  -   -  ).
+ .;     ^     ;.
+ .(   \\___/   ).
+   ..!?££!?..
+`,
+`
+   ..!?££!?..
+  .(  O   O  ).
+ .;    ___    ;.
+ .(   /___\\   ).
+   ..!?££!?..
+`,
+`
+   ..!?££!?..
+  .(  o   o  ).
+ .;     ^     ;.
+ .(   \\___/   ).
+   ..!?££!?..
+`
+];
+
+let i = 0;
+setInterval(() => {
+  document.getElementById("face").textContent = faces[i];
+  i = (i + 1) % faces.length;
+}, 600);
+</script>
+
+
+
